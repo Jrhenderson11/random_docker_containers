@@ -16,16 +16,44 @@ wg genkey | tee client.priv | wg pubkey > client.pub
 /data/clients
 
 ## Usage
-docker run:
-docker build . -t jumpbox
+
+1: Generate keys
+
+```bash
+mkdir -p data/clients
+wg genkey | tee ./data/server.priv | wg pubkey > ./data/server.pub
+
+# per client
+wg genkey | tee ./client.priv | wg pubkey > ./data/clients/client.pub
+
+ssh-keygen
+cp ssh_user.pub data/authorized_keys
+```
+
+
+2: Build:
+`docker build . -t jumpbox`
+
+3: Run
+
+```bash
 sudo docker run --rm --name wg_ssh_jumpbox --cap-add NET_ADMIN -v $(pwd)/data:/data --sysctl net.ipv4.ip_forward=1 jumpbox 
+```
 
---expose 22200/tcp,51820/udp
+`--cap-add NET_ADMIN`: needed by wg
+`-v $(pwd)/data:/data`: used to mount key material
+`--sysctl net.ipv4.ip_forward=1`: used to allow ip forwarding
+
+
+to allow these services to be accessible from the host server:
+```
 -p 22200:22200/tcp,51820/udp:51820/udp
+--expose 22200/tcp,51820/udp
+```
 
-test:
-nc -lkvp 4444
-ssh -R 10.66.66.1:2222:localhost:4444 ssh_user@172.17.0.2 -p 22200 -i key
+example client connection
+nc -lkvp 4444 
+`ssh -R 10.66.66.1:2222:localhost:4444 ssh_user@172.17.0.2 -p 22200 -i ssh_user.priv`
 
 ## Description
 
