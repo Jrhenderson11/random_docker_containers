@@ -20,6 +20,8 @@ wg genkey | tee client.priv | wg pubkey > client.pub
 1: Generate keys
 
 ```bash
+sudo apt-get install wireguard
+
 mkdir -p data/clients
 wg genkey | tee ./data/server.priv | wg pubkey > ./data/server.pub
 

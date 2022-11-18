@@ -11,7 +11,6 @@ RUN useradd ssh_user -p $6$JiJoLmSLs0YXGP1W$UV.5LBCy6agYIBnQE8Nb9zaHjK0i.cphIKMP
 
 RUN mkdir /run/sshd
 
-COPY new_interface.sh .
 COPY ssh.sh .
 COPY wg.sh .
 
