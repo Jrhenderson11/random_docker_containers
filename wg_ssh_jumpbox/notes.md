@@ -39,19 +39,20 @@ cp ssh_user.pub data/authorized_keys
 3: Run
 
 ```bash
-sudo docker run --rm --name wg_ssh_jumpbox --cap-add NET_ADMIN -v $(pwd)/data:/data --sysctl net.ipv4.ip_forward=1 jumpbox 
+
+docker run --rm --name wg_ssh_jumpbox --cap-add NET_ADMIN -v $(pwd)/data:/data --sysctl net.ipv4.ip_forward=1 jumpbox
+
+# To bind to host:
+docker run --rm --name wg_ssh_jumpbox --cap-add NET_ADMIN -v $(pwd)/data:/data --sysctl net.ipv4.ip_forward=1 -p 0.0.0.0:22200:22200/tcp -p 0.0.0.0:51820:51820/udp jumpbox
+
+# To bind to host:
+docker run --rm --name wg_ssh_jumpbox --cap-add NET_ADMIN -v $(pwd)/data:/data --sysctl net.ipv4.ip_forward=1 --expose 22200/tcp,51820/udp jumpbox
 ```
 
 `--cap-add NET_ADMIN`: needed by wg
 `-v $(pwd)/data:/data`: used to mount key material
 `--sysctl net.ipv4.ip_forward=1`: used to allow ip forwarding
 
-
-to allow these services to be accessible from the host server:
-```
--p 22200:22200/tcp,51820/udp:51820/udp
---expose 22200/tcp,51820/udp
-```
 
 example client connection
 nc -lkvp 4444 

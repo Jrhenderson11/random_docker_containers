@@ -1,3 +1,4 @@
+
 NEW_USER=ssh_user
 temp_location=/opt/ssh_srv
 
@@ -30,4 +31,4 @@ EOF
 popd
 #PermitOpen $IP_only:2222
 
-/usr/sbin/sshd -D -p 22200 -f $temp_location/sshd_config -ddd &
+/usr/sbin/sshd -D -p 22200 -f $temp_location/sshd_config &

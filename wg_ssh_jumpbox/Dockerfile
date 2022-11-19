@@ -16,5 +16,6 @@ COPY wg.sh .
 
 EXPOSE 51820/udp
 EXPOSE 2222/tcp
+EXPOSE 22200/tcp
 
 CMD bash ssh.sh && bash wg.sh && echo "==== DONE SETUP ===" && tail -f /dev/null
