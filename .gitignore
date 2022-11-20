@@ -1,3 +1,4 @@
 **/*.priv
 **/*.pub
 **/authorized_keys
+**/vm_details.txt

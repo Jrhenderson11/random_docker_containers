@@ -19,7 +19,7 @@ for key in $(ls /data/clients/*.pub); do
 cat << EOF >> /etc/wireguard/wg0.conf
 [Peer]
 PublicKey = $(cat $key)
-AllowedIPs = 0.0.0.0/0
+AllowedIPs = 10.66.66.0/24
 EOF
 done
 

@@ -28,7 +28,8 @@ wg genkey | tee ./data/server.priv | wg pubkey > ./data/server.pub
 # per client
 wg genkey | tee ./client.priv | wg pubkey > ./data/clients/client.pub
 
-ssh-keygen
+ssh-keygen -t ecdsa -f ssh_user -P ""
+mv ssh_user ssh_user.priv
 cp ssh_user.pub data/authorized_keys
 ```
 
