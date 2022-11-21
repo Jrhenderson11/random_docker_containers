@@ -57,7 +57,7 @@ docker run --rm --name wg_ssh_jumpbox --cap-add NET_ADMIN -v $(pwd)/data:/data -
 
 example client connection
 nc -lkvp 4444 
-`ssh -R 10.66.66.1:2222:localhost:4444 ssh_user@172.17.0.2 -p 22200 -i ssh_user.priv`
+`ssh -R 10.66.66.1:2222:localhost:4444 ssh_user@$ip -p 22200 -i ssh_user.priv`
 
 ## Description
 

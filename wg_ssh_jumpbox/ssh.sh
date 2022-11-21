@@ -7,7 +7,7 @@ chmod og-rwx /data/authorized_keys
 
 mkdir -p $temp_location
 pushd $temp_location
-
+#todo: move outside script
 mkdir -p etc/ssh 
 /usr/bin/ssh-keygen -A -f ./
 
